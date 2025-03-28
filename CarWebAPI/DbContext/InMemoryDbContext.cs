@@ -3,7 +3,7 @@ using CarWebAPI.CarManagement;
 
 namespace CarWebAPI.DbContext;
 
-public class InMemoryDbContext
+public class InMemoryDbContext : IInMemoryDbContext
 {
         private readonly List<Car> _entities = new List<Car>();
 

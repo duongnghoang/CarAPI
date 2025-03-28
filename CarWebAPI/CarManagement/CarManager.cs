@@ -5,7 +5,7 @@ namespace CarWebAPI.CarManagement
 {
     public class CarManager
     {
-        public List<Car> CarList;
+        private readonly 
 
         public CarManager()
         {
