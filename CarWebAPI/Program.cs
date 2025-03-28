@@ -23,7 +23,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<InputValidateMiddleware>();
+// app.UseMiddleware<InputValidateMiddleware>();
+app.UseMiddleware<LoggingMiddleware>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

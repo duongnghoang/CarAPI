@@ -7,4 +7,5 @@ public interface IInMemoryDbContext
     void Add(Car entity);
     IEnumerable<Car> GetAll();
     Car GetById(int id);
+    void UpdateCar(int id, DateTime newMaintenanceDate);
 }
