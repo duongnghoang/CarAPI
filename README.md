@@ -1,6 +1,6 @@
 # CarAPI
 
-CarAPI is a C# based API for managing car-related data and operations. This API allows for the creation, retrieval, updating, and deletion of car information.
+CarAPI is a C# based API for managing car-related data and operations. This API allows for the creation, retrieval and updating maintenance of car information.
 
 ## Features
 
