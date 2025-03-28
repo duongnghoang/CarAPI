@@ -1,7 +1,7 @@
-using CarWebAPI.CarManagement;
 using CarWebAPI.DbContext;
-using CarWebAPI.Interfaces;
 using CarWebAPI.Middleware;
+using CarWebAPI.Models.Factory;
+using CarWebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IInMemoryDbContext, InMemoryDbContext>();
-builder.Services.AddScoped<ICarManager, CarManager>();
+builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddSingleton<ICarFactory, CarFactory>();
 
 var app = builder.Build();
 

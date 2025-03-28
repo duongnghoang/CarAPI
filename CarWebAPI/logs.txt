@@ -1,0 +1,19 @@
+Schema: https
+Host: localhost:7250
+Path: /api/Car/view-all
+QueryString: 
+Request Body: 
+
+Schema: https
+Host: localhost:7250
+Path: /api/Car/add-car
+QueryString: 
+Request Body: {
+  "id": 1,
+  "make": "string",
+  "model": "string",
+  "year": 2024,
+  "carType": "Fuel",
+  "lastMaintanenceTime": "2025-03-28T14:06:02.067Z"
+}
+
