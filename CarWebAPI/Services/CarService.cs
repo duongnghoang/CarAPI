@@ -46,7 +46,7 @@ public class CarService : ICarService
     public Result<UpdateMaintenanceResponse> UpdateCar(int id, DateTime newMaintenanceDate)
     {
         var car = _dbContext.GetById(id);
-        if (car != null) return Result<UpdateMaintenanceResponse>.Fail("Car not found");
+        if (car == null) return Result<UpdateMaintenanceResponse>.Fail("Car not found");
         var updatedCar = _dbContext.Update(id, newMaintenanceDate);
         return Result<UpdateMaintenanceResponse>.Success(new UpdateMaintenanceResponse(updatedCar!.Id, updatedCar.Model,
             updatedCar.NextMaintenanceDate));

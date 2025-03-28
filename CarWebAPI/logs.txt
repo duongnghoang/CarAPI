@@ -30,3 +30,44 @@ Request Body: {
   "lastMaintenanceTime": "2025-03-28T14:38:54.442Z"
 }
 
+Schema: https
+Host: localhost:7250
+Path: /api/Car/update-car-maintenance/1
+QueryString: 
+Request Body: {
+  "newMaintenanceDate": "2025-03-10T14:48:07.794Z"
+}
+
+Schema: https
+Host: localhost:7250
+Path: /api/Car/view-all
+QueryString: 
+Request Body: 
+
+Schema: https
+Host: localhost:7250
+Path: /api/Car/add-car
+QueryString: 
+Request Body: {
+  "id": 1,
+  "make": "Toyota",
+  "model": "Corolla",
+  "year": 2022,
+  "carType": "Fuel",
+  "lastMaintenanceTime": "2025-03-11T14:38:54.442Z"
+}
+
+Schema: https
+Host: localhost:7250
+Path: /api/Car/maintenance/1
+QueryString: 
+Request Body: 
+
+Schema: https
+Host: localhost:7250
+Path: /api/Car/update-car-maintenance/1
+QueryString: 
+Request Body: {
+  "newMaintenanceDate": "2025-03-28T14:53:02.216Z"
+}
+
