@@ -1,4 +1,6 @@
+using CarWebAPI.CarManagement;
 using CarWebAPI.DbContext;
+using Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IInMemoryDbContext, InMemoryDbContext>();
+builder.Services.AddScoped<ICarManager, CarManager>();
 
 var app = builder.Build();
 
@@ -19,6 +22,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<InputValidateMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

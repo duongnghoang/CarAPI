@@ -9,8 +9,9 @@ namespace CarWebAPI.CarManagement
         public DateTime LastMaintenanceDate { get; set; }
         public DateTime NextMaintenanceDate { get; set; }
 
-        public Car(string make, string model, int year, DateTime lastMaintenanceDate)
+        public Car(int id, string make, string model, int year, DateTime lastMaintenanceDate)
         {
+            this.Id = id;
             this.Make = make;
             this.Model = model;
             this.Year = year;

@@ -47,15 +47,15 @@ namespace Middleware
                     await context.Response.WriteAsync("Invalid year value. Year must be between 1886 and current year.");
                     return;
                 }
-                if(!jsonObject.RootElement.TryGetProperty("lastMaintainanceDate", out JsonElement lastMaintainanceDate)){
+                if(!jsonObject.RootElement.TryGetProperty("lastMaintanenceTime", out JsonElement lastMaintainanceDate)){
                     context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("lastMaintainanceDate is required.");
+                    await context.Response.WriteAsync("lastMaintanenceTime is required.");
                     return;
                 }
                 if(!DateTime.TryParse(lastMaintainanceDate.ToString(), out DateTime lastMaintainanceDateTime) || lastMaintainanceDateTime.Year < 1886 || lastMaintainanceDateTime > DateTime.Now)
                 {
                     context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("Invalid lastMaintainanceDate value. lastMaintainanceDate must be between 1886 and current year.");
+                    await context.Response.WriteAsync("Invalid lastMaintanenceTime value. lastMaintanenceTime must be between 1886 and current year.");
                     return;
                 }
 
