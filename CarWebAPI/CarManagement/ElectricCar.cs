@@ -5,8 +5,8 @@ namespace CarWebAPI.CarManagement
     public class ElectricCar : Car, IChargable, IShowRefill
     {
         public DateTime ChargeTime;
-        public ElectricCar(string make, string model, int year, DateTime lastMaintenanceDate)
-            : base(make, model, year, lastMaintenanceDate)
+        public ElectricCar(int id, string make, string model, int year, DateTime lastMaintenanceDate)
+            : base(id, make, model, year, lastMaintenanceDate)
         {
         }
         public override void DisplayDetails()

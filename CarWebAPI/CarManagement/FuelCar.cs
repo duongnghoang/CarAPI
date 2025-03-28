@@ -6,8 +6,8 @@ namespace CarWebAPI.CarManagement
     {
 
         public DateTime RefuelTime;
-        public FuelCar(string make, string model, int year, DateTime lastMaintenanceDate)
-            : base(make, model, year, lastMaintenanceDate)
+        public FuelCar(int id, string make, string model, int year, DateTime lastMaintenanceDate)
+            : base(id, make, model, year, lastMaintenanceDate)
         {
         }
         public override void DisplayDetails()

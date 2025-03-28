@@ -2,7 +2,12 @@ using CarWebAPI.DbContext;
 
 namespace CarWebAPI.CarManagement
 {
-    public class CarManager
+    public interface ICarManager
+    {
+        void AddCar(Car car);
+    }
+
+    public class CarManager : ICarManager
     {
         private readonly IInMemoryDbContext _dbContext;
 
