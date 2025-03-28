@@ -24,8 +24,8 @@ namespace CarWebAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("maintenance/{id}")]
-        public IActionResult GetLastMaintenanceTime(int id)
+        [HttpGet("view-detail/{id}")]
+        public IActionResult GetCarById(int id)
         {
             var car = _carService.GetCarById(id);
             return Ok(car);
