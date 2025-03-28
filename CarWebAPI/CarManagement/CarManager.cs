@@ -1,10 +1,13 @@
-namespace NashTechAssignment
+using CarWebAPI.Common;
+using CarWebAPI.Interfaces;
+
+namespace CarWebAPI.CarManagement
 {
-    public class CarManagement
+    public class CarManager
     {
         public List<Car> carList;
 
-        public CarManagement()
+        public CarManager()
         {
             carList = new List<Car>();
         }

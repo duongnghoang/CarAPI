@@ -1,5 +1,6 @@
+using CarWebAPI.Interfaces;
 
-namespace NashTechAssignment
+namespace CarWebAPI.CarManagement
 {
     public class FuelCar : Car, IFuelable, IShowRefill
     {

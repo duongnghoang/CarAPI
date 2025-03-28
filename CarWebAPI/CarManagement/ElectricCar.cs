@@ -1,4 +1,6 @@
-namespace NashTechAssignment
+using CarWebAPI.Interfaces;
+
+namespace CarWebAPI.CarManagement
 {
     public class ElectricCar : Car, IChargable, IShowRefill
     {

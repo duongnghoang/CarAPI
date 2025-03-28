@@ -1,4 +1,4 @@
-namespace NashTechAssignment
+namespace CarWebAPI.CarManagement
 {
     public abstract class Car
     {

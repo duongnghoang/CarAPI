@@ -1,4 +1,4 @@
-namespace NashTechAssignment
+namespace CarWebAPI.Interfaces
 {
     public interface IFuelable
     {
