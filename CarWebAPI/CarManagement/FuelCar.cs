@@ -5,31 +5,31 @@ namespace CarWebAPI.CarManagement
     public class FuelCar : Car, IFuelable, IShowRefill
     {
 
-        public DateTime refuelTime;
+        public DateTime RefuelTime;
         public FuelCar(string make, string model, int year, DateTime lastMaintenanceDate)
             : base(make, model, year, lastMaintenanceDate)
         {
         }
         public override void DisplayDetails()
         {
-            Console.WriteLine($"Car: {make}{model} ({year})\n Type: Fuel Car\n Last Maintenance Date: {lastMaintenanceDate}\n Next Maintenance Date: {nextMaintenanceDate}");
+            Console.WriteLine($"Car: {Make}{Model} ({Year})\n Type: Fuel Car\n Last Maintenance Date: {LastMaintenanceDate}\n Next Maintenance Date: {NextMaintenanceDate}");
         }
 
         public void Refuel(DateTime timeOfRefuel)
         {
 
-            refuelTime = timeOfRefuel;
+            RefuelTime = timeOfRefuel;
             ShowRefillTime();
         }
 
         public DateTime ShowLastFuelTime()
         {
-            return refuelTime;
+            return RefuelTime;
         }
 
         public void ShowRefillTime()
         {
-            Console.WriteLine($"FuelCar {make} {model} refueled on {refuelTime}");
+            Console.WriteLine($"FuelCar {Make} {Model} refueled on {RefuelTime}");
         }
     }
 }

@@ -2,18 +2,18 @@ namespace CarWebAPI.CarManagement
 {
     public abstract class Car
     {
-        public string make;
-        public string model;
-        public int year;
-        public DateTime lastMaintenanceDate;
-        public DateTime nextMaintenanceDate;
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+        public DateTime LastMaintenanceDate { get; set; }
+        public DateTime NextMaintenanceDate { get; set; }
 
         public Car(string make, string model, int year, DateTime lastMaintenanceDate)
         {
-            this.make = make;
-            this.model = model;
-            this.year = year;
-            this.lastMaintenanceDate = lastMaintenanceDate;
+            this.Make = make;
+            this.Model = model;
+            this.Year = year;
+            this.LastMaintenanceDate = lastMaintenanceDate;
         }
 
         public abstract void DisplayDetails();
@@ -21,7 +21,7 @@ namespace CarWebAPI.CarManagement
         // Method to schedule the next maintenance (6 months later)
         public void ScheduleMaintenance()
         {
-            nextMaintenanceDate = lastMaintenanceDate.AddMonths(6);
+            NextMaintenanceDate = LastMaintenanceDate.AddMonths(6);
         }
     }
 }

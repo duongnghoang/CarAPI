@@ -5,26 +5,26 @@ namespace CarWebAPI.CarManagement
 {
     public class CarManager
     {
-        public List<Car> carList;
+        public List<Car> CarList;
 
         public CarManager()
         {
-            carList = new List<Car>();
+            CarList = new List<Car>();
         }
 
         public void AddCar(Car car)
         {
-            carList.Add(car);
+            CarList.Add(car);
         }
 
         public void ViewAllCars()
         {
-            DisplayCarList(carList);
+            DisplayCarList(CarList);
         }
 
         public List<Car> SearchCarByMake(string make)
         {
-            return carList.Where(car => car.make.Equals(make, StringComparison.OrdinalIgnoreCase)).ToList();
+            return CarList.Where(car => car.Make.Equals(make, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public List<Car> FilterCarsByType(CarType carType)
@@ -32,9 +32,9 @@ namespace CarWebAPI.CarManagement
             switch (carType)
             {
                 case CarType.Fuel:
-                    return carList.Where(car => car is IFuelable).ToList();
+                    return CarList.Where(car => car is IFuelable).ToList();
                 case CarType.Electric:
-                    return carList.Where(car => car is IChargable).ToList();
+                    return CarList.Where(car => car is IChargable).ToList();
                 default:
                     return null;
             }
@@ -42,10 +42,10 @@ namespace CarWebAPI.CarManagement
 
         public string RemoveCarByModel(string model)
         {
-            var carToRemove = carList.FirstOrDefault(car => car.model.Equals(model, StringComparison.OrdinalIgnoreCase));
+            var carToRemove = CarList.FirstOrDefault(car => car.Model.Equals(model, StringComparison.OrdinalIgnoreCase));
             if (carToRemove != null)
             {
-                carList.Remove(carToRemove);
+                CarList.Remove(carToRemove);
                 return "Remove car successfully";
             }
             return "There is no car need to remove";

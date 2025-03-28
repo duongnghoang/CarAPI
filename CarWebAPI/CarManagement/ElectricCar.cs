@@ -4,30 +4,30 @@ namespace CarWebAPI.CarManagement
 {
     public class ElectricCar : Car, IChargable, IShowRefill
     {
-        public DateTime chargeTime;
+        public DateTime ChargeTime;
         public ElectricCar(string make, string model, int year, DateTime lastMaintenanceDate)
             : base(make, model, year, lastMaintenanceDate)
         {
         }
         public override void DisplayDetails()
         {
-            Console.WriteLine($"Car: {make}{model} ({year})\n Type: Electric Car\n Last Maintenance Date: {lastMaintenanceDate}\n Next Maintenance Date: {nextMaintenanceDate}");
+            Console.WriteLine($"Car: {Make}{Model} ({Year})\n Type: Electric Car\n Last Maintenance Date: {LastMaintenanceDate}\n Next Maintenance Date: {NextMaintenanceDate}");
         }
 
         public void Charge(DateTime timeOfCharge)
         {
-            chargeTime = timeOfCharge;
+            ChargeTime = timeOfCharge;
             ShowRefillTime();
         }
 
         public DateTime ShowLastChargeTime()
         {
-            return chargeTime;
+            return ChargeTime;
         }
 
         public void ShowRefillTime()
         {
-            Console.WriteLine($"ElectricCar {make} {model} refueled on {chargeTime}");
+            Console.WriteLine($"ElectricCar {Make} {Model} refueled on {ChargeTime}");
         }
     }
 
