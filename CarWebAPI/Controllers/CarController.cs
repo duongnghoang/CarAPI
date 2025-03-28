@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CarWebAPI.DbContext;
+using CarWebAPI.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,12 @@ namespace CarWebAPI.Controllers
     [ApiController]
     public class CarController : ControllerBase
     {
+        private readonly ICarManager _carManager;
+        public CarController(ICarManager carManager)
+        {
+            _carManager = carManager;
+        }
+
         // GET: api/<CarController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -16,10 +24,24 @@ namespace CarWebAPI.Controllers
         }
 
         // GET api/<CarController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("view-all")] // GET api/cars/view-all
+        public IActionResult ViewAllCars()
         {
-            return "value";
+            var cars = _carManager.GetAllCars();
+            if (!cars.Any())
+                return NotFound("No cars found.");
+
+            return Ok(cars);
+        }
+
+        [HttpGet("maintenance/{id}")] // GET api/cars/last-maintenance/{id}
+        public IActionResult GetLastMaintenanceTime(int id)
+        {
+            var car = _carManager.GetById(id);
+            if (car == null)
+                return NotFound("Car not found.");
+
+            return Ok(car.LastMaintenanceDate);
         }
 
         // POST api/<CarController>
