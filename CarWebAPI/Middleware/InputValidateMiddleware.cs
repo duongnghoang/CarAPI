@@ -1,7 +1,7 @@
 
 using System.Text.Json;
 
-namespace Middleware
+namespace CarWebAPI.Middleware
 {
     public class InputValidateMiddleware
     {

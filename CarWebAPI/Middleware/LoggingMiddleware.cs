@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Middleware
+namespace CarWebAPI.Middleware
 {
     public class LoggingMiddleware
     {

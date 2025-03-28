@@ -1,7 +1,7 @@
 using CarWebAPI.CarManagement;
 using CarWebAPI.DbContext;
 using CarWebAPI.Interfaces;
-using Middleware;
+using CarWebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseMiddleware<InputValidateMiddleware>();
+app.UseMiddleware<InputValidateMiddleware>();
 app.UseMiddleware<LoggingMiddleware>();
 
 app.UseHttpsRedirection();
