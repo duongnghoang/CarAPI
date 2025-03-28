@@ -1,7 +1,7 @@
-using CarWebAPI.DbContext;
-using CarWebAPI.Interfaces;
+using CarWebAPI.CarManagement;
 using Microsoft.AspNetCore.Mvc;
 using Middleware;
+using ICarManager = CarWebAPI.Interfaces.ICarManager;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -47,7 +47,6 @@ namespace CarWebAPI.Controllers
         }
 
         // POST api/<CarController>
-        [MiddlewareFilter(typeof(InputValidateMiddleware))]
         [HttpPost]
         public IActionResult AddCar([FromBody] CarRequest car)
         {

@@ -1,11 +1,8 @@
 using CarWebAPI.DbContext;
+using CarWebAPI.Interfaces;
 
 namespace CarWebAPI.CarManagement
 {
-    public interface ICarManager
-    {
-        void AddCar(Car car);
-    }
 
     public class CarManager : ICarManager
     {
@@ -21,6 +18,25 @@ namespace CarWebAPI.CarManagement
             _dbContext.Add(car);
         }
 
+        public void DeleteCar(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        public IEnumerable<Car> GetAllCars()
+        {
+            return _dbContext.GetAll();
+        }
+
+        public Car GetById(int id)
+        {
+            return _dbContext.GetById(id);
+        }
+
+        public Car GetCarById(int id)
+        {
+            return _dbContext.GetById(id);
+        }
+        
     }
 }

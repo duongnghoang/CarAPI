@@ -19,11 +19,21 @@ namespace Middleware
             try
             {
                 context.Request.EnableBuffering();
-
+                if (context.Request.Method == "GET")
+                {
+                    await _next(context);
+                    return;
+                }
                 using var reader = new StreamReader(context.Request.Body);
                 var body = await reader.ReadToEndAsync();
                 context.Request.Body.Position = 0; // Reset lại stream
                 var jsonObject = JsonDocument.Parse(body);
+                if (!jsonObject.RootElement.TryGetProperty("id", out JsonElement id))
+                {
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    await context.Response.WriteAsync("Id is required.");
+                    return;
+                }
                 if (!jsonObject.RootElement.TryGetProperty("make", out JsonElement make))
                 {
                     context.Response.StatusCode = StatusCodes.Status400BadRequest;

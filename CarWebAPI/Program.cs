@@ -1,5 +1,6 @@
 using CarWebAPI.CarManagement;
 using CarWebAPI.DbContext;
+using CarWebAPI.Interfaces;
 using Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
