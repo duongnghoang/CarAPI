@@ -54,6 +54,7 @@ namespace CarWebAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
+            
             if (car.CarType == "Fuel")
             {
                 var fuelCar = new FuelCar(car.Id, car.Make, car.Model, car.Year, car.LastMaintanenceTime);

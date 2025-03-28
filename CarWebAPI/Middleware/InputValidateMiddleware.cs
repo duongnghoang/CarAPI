@@ -1,6 +1,7 @@
 
 using System.Text.Json;
-
+using CarWebAPI.Helpers;
+using ICarManager = CarWebAPI.Interfaces.ICarManager;
 namespace Middleware
 {
     public class InputValidateMiddleware
@@ -12,9 +13,7 @@ namespace Middleware
             _next = next;
             _logger = logger;
         }
-
-
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, ICarManager carManager)
         {
             try
             {
@@ -28,44 +27,65 @@ namespace Middleware
                 var body = await reader.ReadToEndAsync();
                 context.Request.Body.Position = 0; // Reset lại stream
                 var jsonObject = JsonDocument.Parse(body);
-                if (!jsonObject.RootElement.TryGetProperty("id", out JsonElement id))
+
+                // Validate id field
+                if (!ValidateHelpers.CheckId(jsonObject, out int id))
                 {
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("Id is required.");
+                    await ValidateHelpers.ReturnError(context, "Id is required.");
                     return;
                 }
-                if (!jsonObject.RootElement.TryGetProperty("make", out JsonElement make))
+                if (carManager.GetById(id) != null)
                 {
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("Make is required.");
+                    await ValidateHelpers.ReturnError(context, "Id already exists.");
                     return;
                 }
-                if (!jsonObject.RootElement.TryGetProperty("model", out JsonElement model))
+
+                // Validate make field
+                if (!ValidateHelpers.CheckRequired("make", jsonObject))
                 {
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("Model is required.");
+                    await ValidateHelpers.ReturnError(context, "Make is required.");
                     return;
                 }
-                if(!jsonObject.RootElement.TryGetProperty("year", out JsonElement year)){
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("Year is required.");
-                    return;
-                }
-                if(!int.TryParse(year.ToString(), out int yearInt) || yearInt <1886 || yearInt >DateTime.Now.Year)
+                // Validate model field
+                if (!ValidateHelpers.CheckRequired("model", jsonObject))
                 {
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("Invalid year value. Year must be between 1886 and current year.");
+                    await ValidateHelpers.ReturnError(context, "Model is required.");
                     return;
                 }
-                if(!jsonObject.RootElement.TryGetProperty("lastMaintanenceTime", out JsonElement lastMaintainanceDate)){
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("lastMaintanenceTime is required.");
-                    return;
-                }
-                if(!DateTime.TryParse(lastMaintainanceDate.ToString(), out DateTime lastMaintainanceDateTime) || lastMaintainanceDateTime.Year < 1886 || lastMaintainanceDateTime > DateTime.Now)
+                // Validate year field
+                if (!ValidateHelpers.CheckRequired("year", jsonObject))
                 {
-                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
-                    await context.Response.WriteAsync("Invalid lastMaintanenceTime value. lastMaintanenceTime must be between 1886 and current year.");
+                    await ValidateHelpers.ReturnError(context, "Year is required.");
+                    return;
+                }
+                // Validate year field range
+                if (!ValidateHelpers.CheckYear(jsonObject.RootElement.GetProperty("year").ToString()))
+                {
+                    await ValidateHelpers.ReturnError(context, "Invalid year value. Year must be between 1886 and current year.");
+                    return;
+                }
+                // Validate carType field
+                if (!ValidateHelpers.CheckRequired("carType", jsonObject))
+                {
+                    await ValidateHelpers.ReturnError(context, "CarType is required.");
+                    return;
+                }
+                // Validate carType field value
+                if (!ValidateHelpers.CheckCarType(jsonObject.RootElement.GetProperty("carType").ToString()))
+                {
+                    await ValidateHelpers.ReturnError(context, "Invalid carType value. CarType must be Fuel or Electric.");
+                    return;
+                }
+                // Validate lastMaintanenceTime field
+                if (!ValidateHelpers.CheckRequired("lastMaintanenceTime", jsonObject))
+                {
+                    await ValidateHelpers.ReturnError(context, "lastMaintanenceTime is required.");
+                    return;
+                }
+                // Validate lastMaintanenceTime field range
+                if (!ValidateHelpers.CheckMaintanenceTime(jsonObject.RootElement.GetProperty("lastMaintanenceTime").ToString()))
+                {
+                    await ValidateHelpers.ReturnError(context, "Invalid lastMaintanenceTime value. lastMaintanenceTime must be between 1886 and current year.");
                     return;
                 }
 
@@ -76,7 +96,6 @@ namespace Middleware
             {
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 await context.Response.WriteAsync("Internal Server Error: " + ex.Message);
-                return;
             }
 
         }
