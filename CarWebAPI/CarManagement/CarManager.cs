@@ -37,6 +37,13 @@ namespace CarWebAPI.CarManagement
         {
             return _dbContext.GetById(id);
         }
-        
+        public void UpdateCar(int id, DateTime newMaintenanceDate)
+        {
+            var existingCar = _dbContext.GetById(id);
+            if (existingCar != null)
+            {
+                _dbContext.UpdateCar(id, newMaintenanceDate);
+            }
+        }
     }
 }
