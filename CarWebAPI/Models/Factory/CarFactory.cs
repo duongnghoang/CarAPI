@@ -8,12 +8,16 @@ internal sealed class CarFactory : ICarFactory
     {
         if (carType == "Fuel")
         {
-            return new FuelCar(id, make, model, year, lastMaintenanceTime);
+            var fuelCar = new FuelCar(id, make, model, year, lastMaintenanceTime);
+            fuelCar.ScheduleMaintenance();
+            return fuelCar;
         }
 
         if (carType == "Electric")
         {
-            return new ElectricCar(id, make, model, year, lastMaintenanceTime);
+            var electricCar = new ElectricCar(id, make, model, year, lastMaintenanceTime);
+            electricCar.ScheduleMaintenance();
+            return electricCar;
         }
 
         return null;

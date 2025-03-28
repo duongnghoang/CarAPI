@@ -20,7 +20,7 @@ public class CarService : ICarService
     public Result<Car> AddCar(AddCarRequest carRequest)
     {
         var car = _carFactory.CreateCar(carRequest.Id, carRequest.Make, carRequest.Model, carRequest.Year,
-            carRequest.LastMaintanenceTime, carRequest.CarType);
+            carRequest.LastMaintenanceTime, carRequest.CarType);
         if (car != null)
         {
             _dbContext.Add(car);

@@ -26,7 +26,7 @@ public class InMemoryDbContext : IInMemoryDbContext
         var existingCar = _entities.FirstOrDefault(e => e.Id == id);
         if (existingCar != null) {
             existingCar.LastMaintenanceDate = newMaintenanceDate;
-            existingCar.NextMaintenanceDate = newMaintenanceDate.AddMonths(6);
+            existingCar.ScheduleMaintenance();
             return existingCar;
         }
         return null;

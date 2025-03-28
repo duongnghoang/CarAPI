@@ -17,3 +17,16 @@ Request Body: {
   "lastMaintanenceTime": "2025-03-28T14:06:02.067Z"
 }
 
+Schema: https
+Host: localhost:7250
+Path: /api/Car/add-car
+QueryString: 
+Request Body: {
+  "id": 1,
+  "make": "Toyota",
+  "model": "Corolla",
+  "year": 2022,
+  "carType": "Fuel",
+  "lastMaintenanceTime": "2025-03-28T14:38:54.442Z"
+}
+
